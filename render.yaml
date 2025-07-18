@@ -4,6 +4,8 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     autoDeploy: true
+    port: 8123
+    healthCheckPath: /ping
     envVars:
       - key: CLICKHOUSE_USER
         value: default
