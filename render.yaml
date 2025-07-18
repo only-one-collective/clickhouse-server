@@ -10,7 +10,9 @@ services:
       - key: CLICKHOUSE_USER
         value: default
       - key: CLICKHOUSE_PASSWORD
-        generateValue: true
+        value: "123456"
+      - key: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
+        value: "1"
     disk:
       name: clickhouse-data
       mountPath: /var/lib/clickhouse
