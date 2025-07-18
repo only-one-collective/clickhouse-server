@@ -4,7 +4,6 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     autoDeploy: true
-    port: 8123
     envVars:
       - key: CLICKHOUSE_USER
         value: default
