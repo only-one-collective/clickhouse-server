@@ -1,6 +1,6 @@
 services:
   - name: clickhouse-logs
-    type: web
+    type: worker 
     env: docker
     dockerfilePath: ./Dockerfile
     autoDeploy: true
