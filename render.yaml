@@ -7,13 +7,6 @@ services:
     port: 8123
     healthCheckPath: /ping
     dockerCommand: /entrypoint.sh
-    envVars:
-      - key: CLICKHOUSE_USER
-        value: default
-      - key: CLICKHOUSE_PASSWORD
-        value: "123456"
-      - key: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
-        value: "1"
     disk:
       name: clickhouse-data
       mountPath: /var/lib/clickhouse
