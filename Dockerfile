@@ -3,8 +3,9 @@ FROM clickhouse/clickhouse-server:latest
 RUN echo '<clickhouse>' > /etc/clickhouse-server/config.d/network.xml && \
     echo '    <listen_host>0.0.0.0</listen_host>' >> /etc/clickhouse-server/config.d/network.xml && \
     echo '    <http_port>8123</http_port>' >> /etc/clickhouse-server/config.d/network.xml && \
-    echo '    <tcp_port>9000</tcp_port>' >> /etc/clickhouse-server/config.d/network.xml && \
-    echo '    <mysql_port>9004</mysql_port>' >> /etc/clickhouse-server/config.d/network.xml && \
+    echo '    <!-- TCP and MySQL ports disabled for web service -->' >> /etc/clickhouse-server/config.d/network.xml && \
+    echo '    <tcp_port remove="1"/>' >> /etc/clickhouse-server/config.d/network.xml && \
+    echo '    <mysql_port remove="1"/>' >> /etc/clickhouse-server/config.d/network.xml && \
     echo '</clickhouse>' >> /etc/clickhouse-server/config.d/network.xml
 
 RUN echo '<clickhouse>' > /etc/clickhouse-server/config.d/logging.xml && \
