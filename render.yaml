@@ -6,7 +6,7 @@ services:
     autoDeploy: true
     port: 8123
     healthCheckPath: /ping
-    dockerCommand: /entrypoint.sh
+    dockerCommand: /fix-permissions.sh
     disk:
       name: clickhouse-data
       mountPath: /var/lib/clickhouse

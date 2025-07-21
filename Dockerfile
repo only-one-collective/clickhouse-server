@@ -19,6 +19,13 @@ RUN chown -R clickhouse:clickhouse /var/lib/clickhouse && \
     chown -R clickhouse:clickhouse /var/log/clickhouse-server && \
     chown -R clickhouse:clickhouse /etc/clickhouse-server
 
+# Criar script para corrigir permissões em runtime do disco persistente
+RUN echo '#!/bin/bash' > /fix-permissions.sh && \
+    echo 'chown -R clickhouse:clickhouse /var/lib/clickhouse' >> /fix-permissions.sh && \
+    echo 'chmod -R 755 /var/lib/clickhouse' >> /fix-permissions.sh && \
+    echo 'exec /entrypoint.sh "$@"' >> /fix-permissions.sh && \
+    chmod +x /fix-permissions.sh
+
 EXPOSE 8123
 
-CMD ["/entrypoint.sh"]
+CMD ["/fix-permissions.sh"]
