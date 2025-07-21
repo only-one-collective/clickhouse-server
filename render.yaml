@@ -1,10 +1,11 @@
 services:
   - name: clickhouse-logs
-    type: web  
+    type: web
     env: docker
     dockerfilePath: ./Dockerfile
     autoDeploy: true
-    port: 8123  
+    port: 8123
+    healthCheckPath: /ping
     envVars:
       - key: CLICKHOUSE_USER
         value: default
