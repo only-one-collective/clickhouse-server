@@ -19,10 +19,14 @@ RUN chown -R clickhouse:clickhouse /var/lib/clickhouse && \
     chown -R clickhouse:clickhouse /var/log/clickhouse-server && \
     chown -R clickhouse:clickhouse /etc/clickhouse-server
 
-# Criar script para corrigir permissões em runtime do disco persistente
 RUN echo '#!/bin/bash' > /fix-permissions.sh && \
+    echo 'echo "=== FIXING PERMISSIONS ===" ' >> /fix-permissions.sh && \
+    echo 'ls -la /var/lib/clickhouse/ || echo "Directory does not exist yet"' >> /fix-permissions.sh && \
+    echo 'mkdir -p /var/lib/clickhouse/data /var/lib/clickhouse/metadata /var/lib/clickhouse/access' >> /fix-permissions.sh && \
     echo 'chown -R clickhouse:clickhouse /var/lib/clickhouse' >> /fix-permissions.sh && \
-    echo 'chmod -R 755 /var/lib/clickhouse' >> /fix-permissions.sh && \
+    echo 'chmod -R 750 /var/lib/clickhouse' >> /fix-permissions.sh && \
+    echo 'ls -la /var/lib/clickhouse/' >> /fix-permissions.sh && \
+    echo 'echo "=== STARTING CLICKHOUSE ===" ' >> /fix-permissions.sh && \
     echo 'exec /entrypoint.sh "$@"' >> /fix-permissions.sh && \
     chmod +x /fix-permissions.sh
 
