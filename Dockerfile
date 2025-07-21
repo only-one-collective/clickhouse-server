@@ -15,16 +15,10 @@ RUN echo '<clickhouse>' > /etc/clickhouse-server/config.d/logging.xml && \
     echo '    </logger>' >> /etc/clickhouse-server/config.d/logging.xml && \
     echo '</clickhouse>' >> /etc/clickhouse-server/config.d/logging.xml
 
-# Corrigir permissões para funcionar no Render
 RUN chown -R clickhouse:clickhouse /var/lib/clickhouse && \
     chown -R clickhouse:clickhouse /var/log/clickhouse-server && \
     chown -R clickhouse:clickhouse /etc/clickhouse-server
 
-# Criar script de inicialização que muda para usuário clickhouse
-RUN echo '#!/bin/bash' > /docker-entrypoint.sh && \
-    echo 'exec su-exec clickhouse clickhouse-server --config-file=/etc/clickhouse-server/config.xml' >> /docker-entrypoint.sh && \
-    chmod +x /docker-entrypoint.sh
-
 EXPOSE 8123
 
-CMD ["/docker-entrypoint.sh"]
+CMD ["/entrypoint.sh"]

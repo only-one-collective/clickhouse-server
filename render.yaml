@@ -6,7 +6,7 @@ services:
     autoDeploy: true
     port: 8123
     healthCheckPath: /ping
-    dockerCommand: /docker-entrypoint.sh
+    dockerCommand: /entrypoint.sh
     envVars:
       - key: CLICKHOUSE_USER
         value: default
